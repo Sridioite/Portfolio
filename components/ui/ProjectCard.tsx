@@ -44,6 +44,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      data-glow-hover
       style={{ transition: "transform 0.18s ease, box-shadow 0.3s ease" }}
       className="group flex flex-col rounded-xl bg-[#1a1a18] border border-[#2a2a27] hover:border-green-400/20 overflow-hidden hover:shadow-[0_0_30px_rgba(74,222,128,0.07)]"
       aria-label={`Project: ${project.title}`}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import CursorGlow from "@/components/CursorGlow";
 
 export const metadata: Metadata = {
   title: "Abhishek Kumar — Python Backend Developer",
@@ -55,6 +56,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#111110] text-[#e8e8e6] antialiased">
+        <CursorGlow />
         {children}
       </body>
     </html>

@@ -102,6 +102,7 @@ function HighlightCard({
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        data-glow-hover
         style={{ transition: "transform 0.2s ease" }}
         className="group p-5 rounded-xl bg-[#1a1a18] border border-[#2a2a27] hover:border-green-400/25 h-full cursor-default"
       >
