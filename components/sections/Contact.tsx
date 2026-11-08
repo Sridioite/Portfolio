@@ -40,10 +40,23 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setIsLoading(false);
-    setIsSubmitted(true);
-    setFormState({ name: "", email: "", message: "" });
+    try {
+      const res = await fetch("https://formspree.io/f/mzeeqojw", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formState),
+      });
+      if (res.ok) {
+        setIsSubmitted(true);
+        setFormState({ name: "", email: "", message: "" });
+      } else {
+        alert("Something went wrong. Please try emailing me directly at abhikumar55789@gmail.com");
+      }
+    } catch {
+      alert("Network error. Please try emailing me directly at abhikumar55789@gmail.com");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputBase =
