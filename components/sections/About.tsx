@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -14,17 +15,17 @@ const highlights = [
   },
   {
     icon: Cpu,
-    title: "Full-Stack Development",
+    title: "Full-Stack Dev",
     text: "End-to-end apps with FastAPI backends, Jinja2/Bootstrap frontends, deployed via Docker, Nginx, and AWS S3.",
   },
   {
     icon: Network,
-    title: "Networking & Systems",
+    title: "Networking",
     text: "Deep packet inspection, TCP/IP & TLS parsing, PCAP analysis, and network traffic classification.",
   },
   {
     icon: FlaskConical,
-    title: "Testing & Quality",
+    title: "Testing & QA",
     text: "Writing Pytest suites, automation testing workflows, and structured debugging for reliable APIs.",
   },
 ];
@@ -34,19 +35,15 @@ function AnimatedStat({
   label,
   value,
   isNumber,
-  suffix = "",
 }: {
   label: string;
   value: string;
   isNumber?: boolean;
-  suffix?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
   const mv = useMotionValue(0);
-  const rounded = useTransform(mv, (v) =>
-    isNumber ? v.toFixed(2) : value
-  );
+  const rounded = useTransform(mv, (v) => (isNumber ? v.toFixed(2) : value));
 
   useEffect(() => {
     if (inView && isNumber) {
@@ -60,12 +57,7 @@ function AnimatedStat({
         {label}
       </p>
       <p className="text-sm text-[#e8e8e6] font-medium">
-        {isNumber ? (
-          <motion.span>{rounded}</motion.span>
-        ) : (
-          value
-        )}
-        {suffix}
+        {isNumber ? <motion.span>{rounded}</motion.span> : value}
       </p>
     </div>
   );
@@ -104,20 +96,19 @@ function HighlightCard({
         onMouseLeave={handleMouseLeave}
         data-glow-hover
         style={{ transition: "transform 0.2s ease" }}
-        className="group p-5 rounded-xl bg-[#1a1a18] border border-[#2a2a27] hover:border-green-400/25 h-full cursor-default"
+        className="group p-4 rounded-xl bg-[#1a1a18] border border-[#2a2a27] hover:border-green-400/25 h-full cursor-default"
       >
-        {/* Icon with spin-in */}
         <motion.div
           whileHover={{ rotate: [0, -10, 10, 0], scale: 1.15 }}
           transition={{ duration: 0.4 }}
-          className="w-9 h-9 rounded-lg bg-[#111110] border border-[#2a2a27] flex items-center justify-center mb-4 group-hover:border-green-400/30 transition-colors duration-300"
+          className="w-8 h-8 rounded-lg bg-[#111110] border border-[#2a2a27] flex items-center justify-center mb-3 group-hover:border-green-400/30 transition-colors duration-300"
         >
           <item.icon
-            size={17}
+            size={15}
             className="text-green-400 opacity-80 group-hover:opacity-100 transition-opacity"
           />
         </motion.div>
-        <h3 className="text-sm font-semibold text-[#e8e8e6] mb-2">{item.title}</h3>
+        <h3 className="text-xs font-semibold text-[#e8e8e6] mb-1.5">{item.title}</h3>
         <p className="text-xs text-[#888783] leading-relaxed">{item.text}</p>
       </div>
     </AnimatedSection>
@@ -132,13 +123,14 @@ export default function About() {
       className="relative py-20 md:py-32 border-t border-[#1e1e1c]"
     >
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+        <SectionHeader eyebrow="About" title="Who I am" />
 
-          {/* Left: Text */}
+        {/* ── Main grid: bio | photo | cards ── */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-10 md:gap-8 items-start">
+
+          {/* ── Col 1: Bio text + stats ── */}
           <div>
-            <SectionHeader eyebrow="About" title="Who I am" />
-
-            <div className="space-y-4 text-[#888783] leading-relaxed">
+            <div className="space-y-4 text-[#888783] leading-relaxed mb-8">
               <AnimatedSection delay={0.1}>
                 <p className="text-base md:text-lg text-[#b0afab]">
                   I&apos;m Abhishek Kumar, a Computer Science &amp; Engineering
@@ -148,18 +140,16 @@ export default function About() {
               </AnimatedSection>
 
               <AnimatedSection delay={0.2}>
-                <p className="text-base">
+                <p className="text-sm">
                   My focus is Python backend development — building clean,
                   well-documented REST APIs with FastAPI, managing data with
                   PostgreSQL and SQLAlchemy, and shipping production-grade
-                  apps with Docker, Nginx, and AWS. I&apos;ve also worked deep
-                  in the networking stack, building a packet inspection tool
-                  that classifies traffic even in encrypted TLS streams.
+                  apps with Docker, Nginx, and AWS.
                 </p>
               </AnimatedSection>
 
               <AnimatedSection delay={0.3}>
-                <p className="text-base">
+                <p className="text-sm">
                   I&apos;m actively seeking an entry-level Software Engineer or
                   Python Backend Developer role where I can contribute,
                   grow fast, and ship meaningful products.
@@ -167,9 +157,9 @@ export default function About() {
               </AnimatedSection>
             </div>
 
-            {/* Quick facts with animated CGPA counter */}
-            <AnimatedSection delay={0.4} className="mt-8">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-5 rounded-xl bg-[#1a1a18] border border-[#2a2a27]">
+            {/* Stats grid */}
+            <AnimatedSection delay={0.4}>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-[#1a1a18] border border-[#2a2a27]">
                 {[
                   { label: "Degree",     value: "BE CSE",         isNumber: false },
                   { label: "CGPA",       value: "8.24",           isNumber: true  },
@@ -184,8 +174,63 @@ export default function About() {
             </AnimatedSection>
           </div>
 
-          {/* Right: Highlight cards with tilt */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* ── Col 2: Photo ── */}
+          <AnimatedSection delay={0.15} direction="none" className="flex justify-center">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="relative w-[200px] md:w-[220px] shrink-0"
+            >
+              {/* Outer glow ring */}
+              <div
+                className="absolute -inset-[3px] rounded-2xl pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(74,222,128,0.25) 0%, transparent 50%, rgba(74,222,128,0.1) 100%)",
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Photo container */}
+              <div className="relative rounded-2xl overflow-hidden border border-[#2a2a27] bg-[#1a1a18]">
+                <Image
+                  src="/images/abhishek.jpg"
+                  alt="Abhishek Kumar"
+                  width={220}
+                  height={300}
+                  className="w-full object-cover object-top"
+                  style={{ aspectRatio: "3/4" }}
+                  priority
+                />
+                {/* Subtle dark bottom fade so it blends with the bg */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(17,17,16,0.5) 0%, transparent 100%)",
+                  }}
+                  aria-hidden="true"
+                />
+              </div>
+
+              {/* "Available" badge pinned to bottom */}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap"
+              >
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a1a18] border border-[#2a2a27] text-xs font-mono text-[#888783]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Open to work
+                </span>
+              </motion.div>
+            </motion.div>
+          </AnimatedSection>
+
+          {/* ── Col 3: Highlight cards ── */}
+          <div className="grid grid-cols-2 gap-3 mt-6 md:mt-0">
             {highlights.map((item, i) => (
               <HighlightCard key={item.title} item={item} delay={0.1 + i * 0.1} />
             ))}
