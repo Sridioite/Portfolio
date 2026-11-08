@@ -37,7 +37,6 @@ export const projects: Project[] = [
     image:
       "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80",
     github: "https://github.com/Sridioite/InkFlow",
-    demo: "https://github.com/Sridioite/InkFlow",
     featured: true,
   },
   {
@@ -51,7 +50,6 @@ export const projects: Project[] = [
     image:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
     github: "https://github.com/Sridioite/ByteSniffer",
-    demo: "https://github.com/Sridioite/ByteSniffer",
     featured: true,
   },
 ];

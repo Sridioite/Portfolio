@@ -6,7 +6,6 @@ export interface Project {
   tags: string[];
   image: string;
   github: string;
-  demo: string;
   featured: boolean;
 }
 

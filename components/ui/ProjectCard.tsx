@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
 import { useRef } from "react";
 import type { Project } from "@/types";
 import Tag from "./Tag";
@@ -68,29 +68,23 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a18] via-[#1a1a18]/20 to-transparent" />
 
-        {/* Floating action buttons */}
+        {/* Floating action button */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-200"
         >
-          {[
-            { href: project.github, icon: Github,       label: "GitHub" },
-            { href: project.demo,   icon: ExternalLink, label: "Demo"   },
-          ].map(({ href, icon: Icon, label }) => (
-            <motion.a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} ${label}`}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.92 }}
-              className="w-8 h-8 rounded-lg bg-[#111110]/80 backdrop-blur-sm border border-[#2a2a27] flex items-center justify-center text-[#888783] hover:text-[#e8e8e6] hover:border-green-400/30 transition-colors duration-150"
-            >
-              <Icon size={14} />
-            </motion.a>
-          ))}
+          <motion.a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} GitHub`}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.92 }}
+            className="w-8 h-8 rounded-lg bg-[#111110]/80 backdrop-blur-sm border border-[#2a2a27] flex items-center justify-center text-[#888783] hover:text-[#e8e8e6] hover:border-green-400/30 transition-colors duration-150"
+          >
+            <Github size={14} />
+          </motion.a>
         </motion.div>
 
         {/* Shimmer sweep on hover */}
@@ -148,7 +142,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </motion.div>
 
         {/* Footer */}
-        <div className="flex items-center gap-3 pt-4 border-t border-[#2a2a27]">
+        <div className="flex items-center pt-4 border-t border-[#2a2a27]">
           <motion.a
             href={project.github}
             target="_blank"
@@ -158,19 +152,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             aria-label={`View ${project.title} on GitHub`}
           >
             <Github size={13} />
-            <span>Source</span>
-          </motion.a>
-
-          <motion.a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: -2, color: "#4ade80" }}
-            className="inline-flex items-center gap-1.5 text-xs text-[#888783] transition-colors duration-200 ml-auto"
-            aria-label={`View ${project.title} live demo`}
-          >
-            <span>Live Demo</span>
-            <ExternalLink size={12} />
+            <span>Source Code</span>
           </motion.a>
         </div>
       </div>
