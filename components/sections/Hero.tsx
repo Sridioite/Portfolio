@@ -134,6 +134,27 @@ export default function Hero() {
         ))}
       </div>
 
+      {/* Scroll indicator — anchored to section, outside content flow */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="absolute bottom-10 left-6 hidden md:flex flex-col items-center gap-2 z-10"
+        aria-hidden="true"
+      >
+        <span
+          className="text-xs font-mono text-[#2a2a27] tracking-widest"
+          style={{ writingMode: "vertical-rl" }}
+        >
+          scroll down
+        </span>
+        <motion.div
+          animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="w-px h-10 bg-gradient-to-b from-green-400/40 to-transparent"
+        />
+      </motion.div>
+
       <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-32">
 
         {/* Status badge */}
@@ -255,25 +276,6 @@ export default function Hero() {
               {child}
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-          className="absolute bottom-10 left-6 hidden md:flex flex-col items-center gap-2"
-          aria-hidden="true"
-        >
-          <span className="text-xs font-mono text-[#2a2a27] tracking-widest"
-            style={{ writingMode: "vertical-rl" }}>
-            scroll down
-          </span>
-          <motion.div
-            animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-green-400/40 to-transparent"
-          />
         </motion.div>
 
         {/* Bottom divider */}
